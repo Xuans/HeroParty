@@ -186,26 +186,19 @@ input, textarea {
     height:100%;
     width:100%;
     background-color: rgba(76,76,76,.4);
-    transition:display linear 2s;
+    transition:display linear 10s;
     z-index:8888;
 }
-#pageMessage {
+.page-dialog-box {
+    display:inline-block;
+    max-width:60%;
     background: white;
     color: black;
-    padding: 1em 2em;
     border-radius: 20px;
+    padding: 12px 24px;
 }
-.page-dialog-icon {
-    position: relative;
-    display:inline-block;
-    top: -15px;
-    right: 25px;
-    background: #FFFFFF;
-    border-radius: 5px;
-    border: 2px solid #FF0000;
-    border-radius:50%;
-    color:#FF0000;
-    cursor:pointer;
+#pageDialogIcon {
+    margin-top: 10px;
 }
 /*input-controls*/
 .input-controls {
@@ -399,7 +392,10 @@ input, textarea {
 .button-large {
     font-size:16px;
 }
-
+.button-blue {
+    border-color: #3EC1FF;
+    color: #3EC1FF;
+}
 /* title-fixed*/
 .title-fixed {
     position:fixed;

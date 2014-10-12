@@ -15,8 +15,10 @@
         <table class="text-center" style="height:100%;">
             <tr>
                 <td>
-                    <span id="pageMessage"></span>
-                    <div class="page-dialog-icon">×</div>
+                    <div class="page-dialog-box">
+                        <p id="pageDialogMessage"></p>
+                        <button id="pageDialogIcon" class="button button-blue">OK</button>
+                    </div>
                 </td>
             </tr>
         </table>
@@ -32,12 +34,5 @@
         <h5 class="text-center font-weight-normal padding-top-tiny padding-bottom-tiny">— 茜晴 | 2014 —</h5>
     </div>
     <script src="js/javaScript.js"></script>
-    <script>
-        document.onreadystatechange = function () {
-            if (document.readyState == 'complete') {
-                showUserName();
-            }
-        }
-    </script>
 </body>
 </html>

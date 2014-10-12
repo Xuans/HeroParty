@@ -47,6 +47,17 @@ function getQueryString(name) {
 }
 
 
+
+/*加载完毕后使用的*/
+document.onreadystatechange = function () {
+    if (document.readyState == 'complete') {
+        showUserName();
+        document.getElementById('pageDialogIcon').onclick = function () {
+            addClass(document.getElementById('pageMessageDialog'), 'hide');
+        };
+    }
+}
+
 /*登录注册部分*/
 function goLogin() {
     ajaxHTML('login/login.html', function (responseText) {
@@ -182,7 +193,7 @@ function showUserName() {
 //设置副标题的标题，点击事件，点击事件的参数
 function setSubTitle(subTitle, callback, parms) {
     var obj = document.getElementById('subTitle');
-    obj.innerHTML = '&lt;&nbsp;' + subTitle;
+    obj.innerHTML = subTitle == '' ? '' : '&lt;&nbsp;' + subTitle;
     obj.onclick = function () { callback(parms); };
 }
 /*显示内容*/
@@ -190,6 +201,7 @@ function showPageContent() {
     ajaxHTML('main/pageHeader.html', function (responseText) {
         if (responseText != null && responseText != '') {
             document.getElementById('pageContent').innerHTML = responseText;
+            setSubTitle('', null);
         }
     });
 }
@@ -225,6 +237,6 @@ function showDialog(title) {
 function showMessageDialog(msg, type) {
     if (msg) {
         removeClass(document.getElementById('pageMessageDialog'), 'hide');
-        document.getElementById('pageMessage').innerHTML = msg;
+        document.getElementById('pageDialogMessage').innerHTML = msg;
     }
 }
