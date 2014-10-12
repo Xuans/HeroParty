@@ -1,4 +1,4 @@
-﻿var baseHostPath = 'http://192.168.253.15/party/';
+﻿var baseHostPath = 'http://192.168.253.4/party/';
 var currentUserID,toUserID;
 
 /*自定义函数*/
