@@ -4,7 +4,7 @@
     
     rs.Open sql,conn
     
-    if not(rs.EOF) then
+    if not(rs.EOF) AND rs.Fields("friends")<>"" then
         dim friendsArray,i,friends
             friendsArray=Split(rs.Fields("friends"),",")
             friends="{'friends':["
