@@ -1,0 +1,4 @@
+﻿<%
+	rs.Close
+	conn.Close
+%>

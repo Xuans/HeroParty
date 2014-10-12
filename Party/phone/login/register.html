@@ -1,0 +1,15 @@
+﻿<h1 class="h1-size text-center padding-top-default">用户注册</h1>
+<div class="input-controls padding-top-small">
+    <span>
+        <a href="" onclick="return goLogin()">已有账号，登录</a>
+    </span>
+    <input id="userID" type="text" placeholder="12位学号作为用户ID" />
+    <span id="userIDError" class="text-error"></span>
+    <input id="userName" type="text" placeholder="5位汉字内作为昵称" />
+    <span id="userNameError" class="text-error"></span>
+    <input id="userPwd" type="password" placeholder="6位密码" />
+    <span id="userPwdError" class="text-error"></span>
+    <input id="userPwdConfirm" type="password" placeholder="再次输入密码" />
+    <span id="userPwdConfirmError" class="text-error"></span>
+    <button type="button" class="button button-large" onclick="toRegister()">注册</button>
+</div>

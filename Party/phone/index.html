@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    <meta content="zh-cn" http-equiv="Content-Language">
+    <meta content="minimal-ui" name="viewport">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport" />
+    <meta content="no" name="apple-mobile-web-app-capable" />
+    <link href="style/style.css" rel="stylesheet" />
+    <title>茜晴|首页</title>
+</head>
+<body>
+    <div class="bg-div"></div>
+    <div class="mask-div"></div>
+    <div id="pageHeader">
+        <h3 class="h3-size title-fixed">&lt;&nbsp;<span class="h3-size" id="subTitle"></span></h3>
+        <h4 id="mainTitle" class="h4-size font-weight-normal"></h4>
+    </div>
+    <div id="pageContent">
+
+    </div>
+    <div id="pageFooter">
+        <h5 class="text-center font-weight-normal padding-top-tiny padding-bottom-tiny">— 茜晴 | 2014 —</h5>
+    </div>
+    <script src="js/javaScript.js"></script>
+    <script>
+        document.onreadystatechange = function () {
+            if (document.readyState == 'complete') {
+                showUserName();
+            }
+        }
+    </script>
+</body>
+</html>
