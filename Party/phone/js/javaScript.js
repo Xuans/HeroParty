@@ -268,6 +268,9 @@ function sendDialogMessage() {
                         removeClass(msgLabel, 'send-not-sure');
                     } else {
                         //发送失败迟点做
+
+
+                        fdsfdsfsdfdfds
                     }
                 });
         msg.value = '';
