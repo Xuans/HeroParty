@@ -142,7 +142,7 @@ input, textarea {
     height: 100%;
 }
 .bg-div {
-    background-image: url('../img/2.jpg');
+    background-image: url('../img/6.jpg');
     background-position: top center;
     background-size: cover;
     z-index:-1;
@@ -181,6 +181,7 @@ input, textarea {
     width: 100%;
     z-index: 10000;
 }
+/*对话框*/
 #pageMessageDialog {
     position: fixed;
     height:100%;
@@ -200,6 +201,7 @@ input, textarea {
 #pageDialogIcon {
     margin-top: 10px;
 }
+
 /*input-controls*/
 .input-controls {
     text-align: center;
@@ -360,19 +362,32 @@ input, textarea {
         background-color: rgba(255,255,255,.6);
         color: #000000;
     }
-.dialogInput {
+    /*未确定是否发送成功*/
+.send-not-sure:before {
+    content: '…';
+}
+
+.dialog-input-div {
     position: fixed;
     left: 0;
-    bottom: 26px;
+    bottom: 0;
     width: 100%;
     background-color: #FFFFFF;
-    padding: 7px 2%;
 }
-    .dialogInput > textarea {
+    .dialog-input-div > textarea {
         width: 96%;
+        display: block;
         font-size: 15px;
-        scrollbar-track-color:transparent;
-        resize:none;
+        scrollbar-track-color: transparent;
+        resize: none;
+        margin: 7px 2%;
+    }
+    .dialog-input-div > button {
+        width: 100%;
+        font-size: 15px;
+        padding: 7px 0;
+        background-color: rgba(0,164,88,1);
+        color: wheat;
     }
 /*button*/
 .button {

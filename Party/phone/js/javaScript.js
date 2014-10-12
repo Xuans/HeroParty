@@ -1,5 +1,5 @@
 ﻿var baseHostPath = 'http://192.168.253.4/party/';
-var currentUserID;
+var currentUserID,toUserID;
 
 /*自定义函数*/
 //Class样式操作
@@ -57,6 +57,15 @@ document.onreadystatechange = function () {
         };
     }
 }
+
+/*显示提示信息部分*/
+function showMessage(msg, type) {
+    if (msg) {
+        removeClass(document.getElementById('pageMessageDialog'), 'hide');
+        document.getElementById('pageDialogMessage').innerHTML = msg;
+    }
+}
+
 
 /*登录注册部分*/
 function goLogin() {
@@ -205,13 +214,14 @@ function showPageContent() {
         }
     });
 }
-/*显示好友列表*/
+/*显示好友列表及对话框*/
 function showDialog(title) {
     ajaxHTML(baseHostPath + 'ajax/getFriendsList.asp?userID=' + currentUserID, function (responseText) {
         if (responseText != null && responseText != "") {
             var friendsList = eval("(" + responseText + ")");
             ajaxHTML('main/dialogList.html', function (innerResponseText) {
                 document.getElementById('pageContent').innerHTML = innerResponseText;
+                removeClass(document.getElementById('pageFooter'), 'hide');
                 setSubTitle(title, showPageContent);
                 var friendListStr = '';
                 for (var i = 0; i < friendsList.friends.length; i++) {
@@ -220,9 +230,10 @@ function showDialog(title) {
                 document.getElementById('friendsList').innerHTML = friendListStr;
                 document.getElementById('friendsList').addEventListener('click', function (e) {
                     e = e.srcElement || window.event.srcElement;
-                    var toUserID = e.getAttribute('data-user-id') || e.parentElement.getAttribute('data-user-id');
+                    toUserID = e.getAttribute('data-user-id') || e.parentElement.getAttribute('data-user-id');
                     ajaxHTML('main/dialog.html?userID=' + toUserID, function (dialogResponseText) {
                         document.getElementById('pageContent').innerHTML = dialogResponseText;
+                        addClass(document.getElementById('pageFooter'), 'hide');
                         getUserName(toUserID, function (toUserName) {
                             setSubTitle(toUserName, showDialog, [title]);
                         });
@@ -230,13 +241,54 @@ function showDialog(title) {
                 }, false);
             });
         } else {
-            showMessageDialog('您的私聊圈是空的哦~','error');
+            showMessage('您的私聊圈是空的哦~','error');
         }
     });
 }
-function showMessageDialog(msg, type) {
-    if (msg) {
-        removeClass(document.getElementById('pageMessageDialog'), 'hide');
-        document.getElementById('pageDialogMessage').innerHTML = msg;
+var timeStamp;//判断时间是否超过1分钟，如果跟上次时间超过1分钟，则插入时间轴
+function sendDialogMessage() {
+    var msg = document.getElementById('dialogInput');
+    if (msg.value != null && msg.value != '') {
+        var innerTimeStamp = new Date();
+        if (!timeStamp || innerTimeStamp.getMinutes() - 1 > timeStamp) {
+            var timeLabel = document.createElement('LI');
+            timeLabel.className = 'time';
+            timeLabel.innerHTML = '<span>' + innerTimeStamp.toLocaleString() + '</span>';
+            document.getElementById('dialogContent').appendChild(timeLabel);
+        }
+        timeStamp = innerTimeStamp.getMinutes();
+        var msgLabel = document.createElement('LI');
+        msgLabel.className = 'right send-not-sure';
+        msgLabel.innerHTML = '<span>' + msg.value + '</span>';
+        document.getElementById('dialogContent').appendChild(msgLabel);
+        window.scrollTo(0, 100000);
+        ajaxHTML((baseHostPath + 'ajax/sendDialogMessage.asp?fromWhom='+currentUserID+'&toWhom='+toUserID+'&message='+escape(msg.value)),
+                function (sendOK) {
+                    if (sendOK == '1') {
+                        removeClass(msgLabel, 'send-not-sure');
+                    } else {
+                        //发送失败迟点做
+                    }
+                });
+        msg.value = '';
+    } else {
+        showMessage('发送的消息不能为空哦', 'error');
     }
+}
+
+function getDialogMessage() {
+    ajaxHTML(
+        baseHostPath + 'ajax/getDialogMessage.asp?toWhom=' + currentUserID, function (responseText) {
+            if (responseText != null && responseText != "") {
+                var messageList = eval("(" + responseText + ")"), msgLabel;
+                for (var i = 0; i < messageList.message.length; i++) {
+                    if (messageList.message[i].fromWhom == toUserID) {
+                        msgLabel = document.createElement('LI');
+                        msgLabel.className = 'left';
+                        msgLabel.innerHTML = '<span>' + msg.value + '</span>';
+                        document.getElementById('dialogContent').appendChild(msgLabel);
+                    }
+                }
+            }
+        });
 }
