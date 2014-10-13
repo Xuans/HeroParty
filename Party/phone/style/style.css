@@ -195,7 +195,7 @@ input, textarea {
     max-width:60%;
     background: white;
     color: black;
-    border-radius: 20px;
+    border-radius: 2px;
     padding: 12px 24px;
 }
 #pageDialogIcon {
@@ -351,7 +351,7 @@ input, textarea {
         padding: .25em .5em;
         width: auto;
         max-width: 70%;
-        word-break: break-all;
+        word-break:normal;
         font-size: 15px;
         border-radius: 4px;
     }
@@ -364,6 +364,7 @@ input, textarea {
     }
     /*未确定是否发送成功*/
 .send-not-sure:before {
+    margin-right:5px;
     content: '…';
 }
 

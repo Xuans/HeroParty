@@ -1,4 +1,4 @@
-﻿var baseHostPath = 'http://192.168.253.15/party/';
+﻿var baseHostPath = 'http://192.168.253.4/party/';
 var currentUserID,toUserID;
 
 /*自定义函数*/
@@ -215,7 +215,10 @@ function showPageContent() {
     });
 }
 /*显示好友列表及对话框*/
+var getDilalogMessageListener;//监听是否有新的消息
 function showDialog(title) {
+    //清除监听
+    window.clearInterval(getDilalogMessageListener);
     ajaxHTML(baseHostPath + 'ajax/getFriendsList.asp?userID=' + currentUserID, function (responseText) {
         if (responseText != null && responseText != "") {
             var friendsList = eval("(" + responseText + ")");
@@ -234,6 +237,8 @@ function showDialog(title) {
                     ajaxHTML('main/dialog.html?userID=' + toUserID, function (dialogResponseText) {
                         document.getElementById('pageContent').innerHTML = dialogResponseText;
                         addClass(document.getElementById('pageFooter'), 'hide');
+                        //添加监听
+                        getDilalogMessageListener = window.setInterval(getDialogMessage, 5000);
                         getUserName(toUserID, function (toUserName) {
                             setSubTitle(toUserName, showDialog, [title]);
                         });
@@ -246,31 +251,33 @@ function showDialog(title) {
     });
 }
 var timeStamp;//判断时间是否超过1分钟，如果跟上次时间超过1分钟，则插入时间轴
+
+function insertTimeStamp() {
+    var innerTimeStamp = new Date();
+    if (!timeStamp || innerTimeStamp.getMinutes() - 1 > timeStamp) {
+        var timeLabel = document.createElement('LI');
+        timeLabel.className = 'time';
+        timeLabel.innerHTML = '<span>' + innerTimeStamp.toLocaleString() + '</span>';
+        document.getElementById('dialogContent').appendChild(timeLabel);
+    }
+    timeStamp = innerTimeStamp.getMinutes();
+}
 function sendDialogMessage() {
     var msg = document.getElementById('dialogInput');
     if (msg.value != null && msg.value != '') {
-        var innerTimeStamp = new Date();
-        if (!timeStamp || innerTimeStamp.getMinutes() - 1 > timeStamp) {
-            var timeLabel = document.createElement('LI');
-            timeLabel.className = 'time';
-            timeLabel.innerHTML = '<span>' + innerTimeStamp.toLocaleString() + '</span>';
-            document.getElementById('dialogContent').appendChild(timeLabel);
-        }
-        timeStamp = innerTimeStamp.getMinutes();
+        insertTimeStamp();
         var msgLabel = document.createElement('LI');
         msgLabel.className = 'right send-not-sure';
         msgLabel.innerHTML = '<span>' + msg.value + '</span>';
         document.getElementById('dialogContent').appendChild(msgLabel);
         window.scrollTo(0, 100000);
-        ajaxHTML((baseHostPath + 'ajax/sendDialogMessage.asp?fromWhom='+currentUserID+'&toWhom='+toUserID+'&message='+escape(msg.value)),
+        //注意，此处用了替换 “'” 的地方，防止sql无法执行
+        ajaxHTML((baseHostPath + 'ajax/sendDialogMessage.asp?fromWhom='+currentUserID+'&toWhom='+toUserID+'&message='+escape(msg.value.replace(/'/g,"''"))),
                 function (sendOK) {
                     if (sendOK == '1') {
                         removeClass(msgLabel, 'send-not-sure');
                     } else {
                         //发送失败迟点做
-
-
-                        fdsfdsfsdfdfds
                     }
                 });
         msg.value = '';
@@ -286,10 +293,12 @@ function getDialogMessage() {
                 var messageList = eval("(" + responseText + ")"), msgLabel;
                 for (var i = 0; i < messageList.message.length; i++) {
                     if (messageList.message[i].fromWhom == toUserID) {
+                        insertTimeStamp();
                         msgLabel = document.createElement('LI');
                         msgLabel.className = 'left';
-                        msgLabel.innerHTML = '<span>' + msg.value + '</span>';
+                        msgLabel.innerHTML = '<span>' + messageList.message[i].message + '</span>';
                         document.getElementById('dialogContent').appendChild(msgLabel);
+                        window.scrollTo(0, 100000);
                     }
                 }
             }
