@@ -1,0 +1,98 @@
+﻿/*page-header*/
+#pageHeader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0,0,0,.2);
+    z-index: 10000;
+}
+#mainTitle, #subTitle, #menuDiv {
+    cursor: pointer;
+    clear: none;
+}
+#mainTitle {
+    padding: 5px 10px 5px 0;
+    float:right;
+}
+#subTitle {
+    padding: 0 10px;
+    float:left;
+}
+#menuDiv {
+float: right;
+max-height: 100%;
+width: 30px;
+padding: 3px 5px;
+}
+    #menuDiv.active {
+        background-color: rgba(0,0,0,.4);
+    }
+    #menuDiv>div> p {
+        margin: 3px 0;
+        background-color:#FFFFFF;
+        border: 2px solid #FFFFFF;
+        border-radius: 2px;
+    }
+    #runningList {
+        position: fixed;
+        right:0;
+        margin: 3px 0 0;
+        display: none;
+        list-style: none;
+        background-color: rgba(255,255,255,.9);
+        height: 100%;
+        width:100%;
+        color:#000000;
+        z-index: 13000;
+        overflow-y:auto;
+    }
+        #runningList> li {
+            padding:8px 15px 8px 20px;
+            border-bottom:1px solid rgba(76,76,76,.2);
+            text-align:right;
+            font-size:18px;
+        }
+.active > #runningList {
+    display:inline-block;
+}
+#runningList> li.running-title {
+    height: 20%;
+    text-align: center;
+    font-size: 40px;
+    color: rgba(0,0,0,.2);
+}
+#pageContent {
+    position: relative;
+    padding: 30px 0 5px;
+    z-index: 1;
+}
+#pageFooter {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0,0,0,0.2);
+    width: 100%;
+    z-index: 10000;
+}
+/*对话框*/
+#pageMessageDialog {
+    position: fixed;
+    height:100%;
+    width:100%;
+    background-color: rgba(0,0,0,.6);
+    transition:display linear 10s;
+    z-index:8888;
+}
+.page-dialog-box {
+    display:inline-block;
+    max-width:60%;
+    background: white;
+    color: black;
+    border-radius: 2px;
+    padding: 12px 24px;
+}
+/*对话框的OKbutton*/
+#pageDialogIcon {
+    margin-top: 10px;
+}

@@ -1,0 +1,84 @@
+﻿.friends-list {
+    list-style:none;
+    padding-bottom:20px;
+}
+    .friends-list > li {
+        position:relative;
+        height:50px;
+        border-bottom:1px solid rgba(255,255,255,.2);
+        cursor:pointer;
+    }
+        .friends-list > li > p {
+           
+            position:absolute;
+            bottom:5px;
+            right:10px;
+            width:100%;
+            font-size:25px;
+            text-align:right;
+        }
+.dialog-list {
+    list-style:none;
+    padding-top:5px;
+    padding:30px 0 70px;
+}
+    .dialog-list > .time {
+        text-align: center;
+    }
+    .dialog-list > .left {
+        padding: 10px 15px;
+        text-align: left;
+    }
+    .dialog-list > .right {
+        padding: 10px 15px;
+        text-align: right;
+    }
+    .dialog-list > .time > span {
+        padding: .25em .5em;
+        background-color: rgba(0,0,0,.4);
+        border-radius: 4px;
+    }
+    .dialog-list > .left > span,
+    .dialog-list > .right > span {
+        display:inline-block;
+        padding: .25em .5em;
+        width: auto;
+        max-width: 70%;
+        word-break:normal;
+        font-size: 15px;
+        border-radius: 4px;
+    }
+    .dialog-list > .left > span {
+        background-color: rgba(0,255,0,.6);
+    }
+    .dialog-list > .right > span {
+        background-color: rgba(255,255,255,.6);
+        color: #000000;
+    }
+    /*未确定是否发送成功*/
+.send-not-sure:before {
+    margin-right:5px;
+    content: '…';
+}
+
+.dialog-input-div {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #FFFFFF;
+}
+    .dialog-input-div > textarea {
+        display: block;
+        width: 96%;
+        font-size: 15px;
+        resize:vertical;
+        margin: 7px 2%;
+    }
+    .dialog-input-div > button {
+        width: 100%;
+        font-size: 15px;
+        padding: 7px 0;
+        background-color: rgba(0,164,88,1);
+        color: white;
+    }

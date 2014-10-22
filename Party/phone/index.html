@@ -7,7 +7,11 @@
     <meta content="minimal-ui" name="viewport">
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport" />
     <meta content="no" name="apple-mobile-web-app-capable" />
-    <link href="style/style.css" rel="stylesheet" />
+    <link href="style/common.css" rel="stylesheet" />
+    <link href="style/forms.css" rel="stylesheet" />
+    <link href="style/layout.css" rel="stylesheet" />
+    <link href="style/index.css" rel="stylesheet" />
+    <link href="style/dialog.css" rel="stylesheet" />
     <title>茜晴|首页</title>
 </head>
 <body>
@@ -26,13 +30,31 @@
     <div class="bg-div"></div>
     <div class="mask-div"></div>
     <div id="pageHeader">
-        <h3 id="subTitle" class="h3-size title-fixed"></h3>
+        <h3 id="subTitle" class="h3-size"></h3>
+        <div id="menuDiv" class="hide">
+            <div id="menuInnerDiv">
+                <p></p>
+                <p></p>
+                <p></p>
+            </div>
+            <ul id="runningList">
+                <li data-target="pageIndex" data-id="pageIndex">首页</li>
+                <li id="runningListTitle" class="running-title">导航中心</li>
+            </ul>
+
+        </div>
         <h4 id="mainTitle" class="h4-size font-weight-normal"></h4>
     </div>
-    <div id="pageContent"></div>
+    <div id="pageContent">
+
+    </div>
     <div id="pageFooter">
         <h5 class="text-center font-weight-normal padding-top-tiny padding-bottom-tiny">— 茜晴 | 2014 —</h5>
     </div>
-    <script src="js/javaScript.js"></script>
+    <script src="js/variables.js"></script>
+    <script src="js/API.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/login.js"></script>
+    <script src="js/dialog.js"></script>
 </body>
 </html>

@@ -1,0 +1,52 @@
+﻿/*input-controls*/
+.input-controls {
+    text-align: center;
+}
+    .input-controls > input {
+        display:block;
+        margin:10px auto 15px;
+        padding:0.25em 0.5em;
+        border-radius:2px;
+        border:1px solid #EEEEEE;
+        width:80%;
+        min-width:200px;
+        max-width:400px;
+        font-size:16px;
+    }
+        .input-controls > input.error {
+            border-color: #FF0000;
+        }
+        .input-controls > input:focus {
+            border-color:#3EC1FF;
+        }
+    .input-controls > span {
+        display: block;
+        width: 80%;
+        min-width: 200px;
+        max-width: 400px;
+        margin: 0 auto;
+        text-align: right;
+    }
+
+/*button*/
+.button {
+    padding: 0.25em 1em;
+    background-color:transparent;
+    border: 1px solid #EEEEEE;
+    border-radius: 4px;
+    color:#EEEEEE;
+    transition:all linear .5s;
+}
+.button:hover,
+.button:active {
+    background-color:rgba(62,209,255,.2);
+    border-color:#3EC1FF;
+    color:#FFFFFF;
+}
+.button-large {
+    font-size:16px;
+}
+.button-blue {
+    border-color: #3EC1FF;
+    color: #3EC1FF;
+}
